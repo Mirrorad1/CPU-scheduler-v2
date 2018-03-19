@@ -1,4 +1,3 @@
-
 #Process object
 #Gantt gchart
 #shift Circular left
@@ -7,23 +6,23 @@
 
 
 class Process:                             #Class for the process 
-    def __init__(self, pid, AT, BT):		#pid: Process id, AT: Arrival time, BT: Burst time
+    def __init__(self, pid, arrival_time, burst_time):		#pid: Process id, arrival_time: Arrival time, burst_time: Burst time
         self.pid = pid 
-        self.arrival = AT 
-        self.burst = BT 
+        self.arrival = arrival_time 
+        self.burst = burst_time 
         
 
-def shiftCL(alist):
-    temp = alist[0]
-    for i in range(len(alist)-1):
-        alist[i] = alist[i+1]
-    alist[len(alist)-1]=temp
+def shiftCL(alist):             #alist is queue list 1,2,3=> 3,2,1 => 2,1,3
+    temp = alist[0]             #first process in the list 
+    for i in range(len(alist)-1):   # -1 
+        alist[i] = alist[i+1]       # any shft will add +1 
+    alist[len(alist)-1]=temp        #-1 is the last place in the list ex. 0-4 =>5 elements -1 = 4
     return alist
 
 def RR(tq,plist,n):				#Round Robin(RR) (plist: process list, tq: Quantum time)
     global gchart
     queue=[]
-    time = 0						#we start at time 0
+    time = 0						#we start arrival_time time 0
     ap= 0							#arrived processes
     done=0							#done processes, to count the number of processes finished 
     q=tq							#time quantum
